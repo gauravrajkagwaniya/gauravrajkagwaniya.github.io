@@ -7,142 +7,264 @@
 <style>
   :root {
     --bg: #ffffff;
-    --fg: #1a1a1a;
-    --muted: #6b6b6b;
-    --accent: #0a66ff;
-    --card-bg: #f5f5f7;
-    --border: #e5e5e7;
+    --bg-soft: #f6f7f9;
+    --fg: #14141a;
+    --muted: #63636e;
+    --border: #e6e6eb;
+    --card: #ffffff;
+    --accent: #4f5bff;
+    --accent-soft: #eef0ff;
+    --flutter: #02569b;
+    --flutter-soft: #e3f1fb;
+    --java: #b52534;
+    --java-soft: #fbe9e9;
+    --spring: #2f8132;
+    --spring-soft: #e9f5e9;
+    --shadow: 0 1px 2px rgba(20,20,26,0.04), 0 8px 24px rgba(20,20,26,0.05);
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #0d0d0f;
-      --fg: #f2f2f3;
-      --muted: #9a9a9e;
-      --accent: #5b9dff;
-      --card-bg: #18181b;
-      --border: #2a2a2e;
+      --bg: #0b0b0e;
+      --bg-soft: #131317;
+      --fg: #f1f1f4;
+      --muted: #9a9aa4;
+      --border: #232329;
+      --card: #16161b;
+      --accent: #8b93ff;
+      --accent-soft: #1c1e3a;
+      --flutter: #5ec3ff;
+      --flutter-soft: #10222e;
+      --java: #ff8a7a;
+      --java-soft: #2c1616;
+      --spring: #7ed389;
+      --spring-soft: #132717;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px rgba(0,0,0,0.35);
     }
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
     background: var(--bg);
     color: var(--fg);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
   }
-  main {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 4.5rem 1.5rem 3rem;
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* Hero */
+  .hero {
+    padding: 5rem 0 3.5rem;
+    background:
+      radial-gradient(560px 280px at 15% -10%, var(--accent-soft), transparent 70%),
+      radial-gradient(480px 240px at 100% 0%, var(--flutter-soft), transparent 70%);
+  }
+  .avatar {
+    width: 68px;
+    height: 68px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--accent), var(--flutter));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
   }
   h1 {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin: 0 0 0.35rem;
-    letter-spacing: -0.01em;
+    font-size: clamp(1.9rem, 4vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.5rem;
   }
   .tagline {
     color: var(--muted);
-    font-size: 1.05rem;
-    margin: 0 0 2.5rem;
+    font-size: 1.1rem;
+    max-width: 46ch;
+    margin: 0 0 1.75rem;
   }
-  h2 {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    font-weight: 600;
-    margin: 0 0 0.9rem;
-  }
-  .links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin-bottom: 2.75rem;
-  }
+  .links { display: flex; flex-wrap: wrap; gap: 0.6rem; }
   .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     color: var(--fg);
     text-decoration: none;
+    background: var(--card);
     border: 1px solid var(--border);
     border-radius: 999px;
-    padding: 0.4rem 0.95rem;
+    padding: 0.5rem 1.05rem;
     font-size: 0.9rem;
-    transition: border-color 0.15s ease;
+    font-weight: 500;
+    box-shadow: var(--shadow);
+    transition: transform 0.15s ease, border-color 0.15s ease;
   }
-  .links a:hover { border-color: var(--accent); }
-  .card {
-    display: block;
-    background: var(--card-bg);
+  .links a:hover { transform: translateY(-1px); border-color: var(--accent); }
+
+  /* Sections */
+  section { padding: 2.5rem 0; }
+  .eyebrow {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-weight: 700;
+    margin: 0 0 1.1rem;
+  }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.85rem; }
+  .skill {
+    background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 1.25rem 1.4rem;
+    border-radius: 16px;
+    padding: 1.1rem 1.2rem;
+    box-shadow: var(--shadow);
+  }
+  .skill-top { display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.45rem; }
+  .skill-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .skill-icon svg { width: 19px; height: 19px; }
+  .skill-name { font-weight: 700; font-size: 1rem; }
+  .skill-desc { color: var(--muted); font-size: 0.86rem; margin: 0; }
+  .flutter-icon { background: var(--flutter-soft); color: var(--flutter); }
+  .java-icon { background: var(--java-soft); color: var(--java); }
+  .spring-icon { background: var(--spring-soft); color: var(--spring); }
+  .dart-icon { background: var(--flutter-soft); color: var(--flutter); }
+  .kotlin-icon { background: var(--java-soft); color: var(--java); }
+  .swift-icon { background: var(--spring-soft); color: var(--spring); }
+
+  /* Projects */
+  .card-link {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.4rem 1.5rem;
     text-decoration: none;
     color: inherit;
-    margin-bottom: 0.85rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.15s ease, border-color 0.15s ease;
   }
-  .card-title {
-    font-weight: 600;
-    font-size: 1.02rem;
-    margin: 0 0 0.3rem;
-    color: var(--fg);
-  }
-  .card-desc {
-    color: var(--muted);
-    font-size: 0.92rem;
-    margin: 0 0 0.7rem;
-  }
-  .card-meta {
-    display: flex;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-  }
-  .badge {
-    font-size: 0.75rem;
-    color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 12%, transparent);
+  .card-link:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .card-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.4rem; }
+  .card-title { font-weight: 700; font-size: 1.08rem; }
+  .arrow { color: var(--muted); font-size: 1.1rem; transition: transform 0.15s ease; }
+  .card-link:hover .arrow { transform: translateX(3px); color: var(--accent); }
+  .card-desc { color: var(--muted); font-size: 0.92rem; margin: 0 0 0.9rem; }
+  .tags { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 700;
     border-radius: 6px;
-    padding: 0.15rem 0.5rem;
-    font-weight: 600;
+    padding: 0.2rem 0.55rem;
   }
+  .tag-flutter { color: var(--flutter); background: var(--flutter-soft); }
+  .tag-dart { color: var(--accent); background: var(--accent-soft); }
+  .tag-swift { color: var(--spring); background: var(--spring-soft); }
+
   footer {
-    margin-top: 3rem;
+    padding: 2.5rem 0 3rem;
     color: var(--muted);
     font-size: 0.82rem;
+    border-top: 1px solid var(--border);
+    margin-top: 1rem;
   }
 </style>
 </head>
 <body>
-<main>
-  <h1>Gaurav Raj Kagwaniya</h1>
-  <p class="tagline">Flutter &amp; mobile engineer.</p>
-
-  <div class="links">
-    <a href="https://github.com/gauravrajkagwaniya">GitHub</a>
-    <a href="https://pub.dev/publishers/gauravrajkagwaniya.github.io/packages">pub.dev</a>
-  </div>
-
-  <h2>Packages</h2>
-  <a class="card" href="https://github.com/gauravrajkagwaniya/native_adaptive_ui">
-    <p class="card-title">native_adaptive_ui</p>
-    <p class="card-desc">
-      Adaptive Flutter widgets that resolve by platform, OS version and form
-      factor — Liquid Glass on iOS 26, Material 3 Expressive on Android 16,
-      iPad-aware layouts, with safe fallbacks everywhere else.
-    </p>
-    <div class="card-meta">
-      <span class="badge">Flutter</span>
-      <span class="badge">Dart</span>
-      <span class="badge">Swift</span>
+  <div class="wrap">
+    <div class="hero">
+      <div class="avatar">GR</div>
+      <h1>Gaurav Raj Kagwaniya</h1>
+      <p class="tagline">
+        Software engineer building mobile apps with Flutter and backend
+        services with Java &amp; Spring Boot.
+      </p>
+      <div class="links">
+        <a href="https://github.com/gauravrajkagwaniya">GitHub ↗</a>
+        <a href="mailto:gauravrajkagwaniya@gmail.com">Email</a>
+      </div>
     </div>
-  </a>
 
-  <footer>
-    &copy; <span id="year"></span> Gaurav Raj Kagwaniya
-  </footer>
-</main>
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+    <section>
+      <p class="eyebrow">Stack</p>
+      <div class="skills">
+        <div class="skill">
+          <div class="skill-top">
+            <span class="skill-icon flutter-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.3 2 4 12.3l3.4 3.4L21 2z"/><path d="M14.3 22 4 11.7l3.4-3.4"/><path d="M11 15.7 21 22h-6.7"/></svg>
+            </span>
+            <span class="skill-name">Flutter</span>
+          </div>
+          <p class="skill-desc">Cross-platform apps — adaptive UI, platform channels, native integrations.</p>
+        </div>
+        <div class="skill">
+          <div class="skill-top">
+            <span class="skill-icon dart-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18"/></svg>
+            </span>
+            <span class="skill-name">Dart</span>
+          </div>
+          <p class="skill-desc">App logic, package authoring, widget composition.</p>
+        </div>
+        <div class="skill">
+          <div class="skill-top">
+            <span class="skill-icon java-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3c-2 3 4 4 2 8"/><path d="M6 15c-2 2 0 4 4 4 5 0 9-1 9-4"/><path d="M7 19c-1 1 1 2 5 2 5 0 8-1 8-3"/></svg>
+            </span>
+            <span class="skill-name">Java</span>
+          </div>
+          <p class="skill-desc">Backend services, REST APIs, JVM tooling.</p>
+        </div>
+        <div class="skill">
+          <div class="skill-top">
+            <span class="skill-icon spring-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 2v6"/><path d="M12 12l7-7"/></svg>
+            </span>
+            <span class="skill-name">Spring Boot</span>
+          </div>
+          <p class="skill-desc">Production APIs — auth, data access, service architecture.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">Packages</p>
+      <a class="card-link" href="https://github.com/gauravrajkagwaniya/native_adaptive_ui">
+        <div class="card-head">
+          <span class="card-title">native_adaptive_ui</span>
+          <span class="arrow">→</span>
+        </div>
+        <p class="card-desc">
+          Adaptive Flutter widgets that resolve by platform, OS version and
+          form factor — Liquid Glass on iOS 26, Material 3 Expressive on
+          Android 16, iPad-aware layouts, with safe fallbacks everywhere else.
+        </p>
+        <div class="tags">
+          <span class="tag tag-flutter">Flutter</span>
+          <span class="tag tag-dart">Dart</span>
+          <span class="tag tag-swift">Swift</span>
+        </div>
+      </a>
+    </section>
+
+    <footer>
+      &copy; <span id="year"></span> Gaurav Raj Kagwaniya
+    </footer>
+  </div>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
